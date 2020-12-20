@@ -18,14 +18,12 @@
         <img src="../assets/logo.png" width="100px" height="100px">
     </div>
     <div class="col-md-6 centeralign">
-        <p>This Page Displays a list of customers</p>
-        <p>Clicking on a Card Displays the name below. This is to demonstrate passing data from parent to child component</p>
-        <p>"Click for more details" Redirects to a new page which displays the customer information</p>
+        
         <div class="card centeralign addmargin" style="width: 18rem;" v-for="customer in customerlist" :key="customer.id">
             <div class="card-body" v-on:click="setSelectedCustomer(customer.name)">
-                <h5 class="card-title">{{customer.name}}</h5>
+                <h5 class="card-title">{{customer.first_name}}</h5>
+                <p class="card-text">{{customer.last_name}}</p>
                 <p class="card-text">{{customer.email}}</p>
-                <p class="card-text">{{customer.phone}}</p>
 
                 <a class="btn btn-primary" v-on:click="goToDetailsPage(customer.id)"><span style="color:white">Click for more details</span></a>
             </div>
@@ -47,9 +45,9 @@ export default {
     mounted() {
         axios({
             method: "GET",
-            "url": "assets/samplejson/customerlist.json"
+            "url": "https://reqres.in/api/users?page=2"
         }).then(response => {
-            this.customerlist = response.data;
+            this.customerlist = response.data.data;
         }, error => {
             // eslint-disable-next-line
             console.error(error);

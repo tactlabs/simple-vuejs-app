@@ -22,16 +22,9 @@
             Customer Details
         </div>
         <div class="card-body">
-            <h5 class="card-title">{{customerDetails.name}}</h5>
-            <p class="card-text">Name : {{customerDetails.name}}</p>
+            <h5 class="card-title">{{customerDetails.first_name}}</h5>
+            <p class="card-text">Name : {{customerDetails.last_name}}</p>
             <p class="card-text">Email : {{customerDetails.email}}</p>
-            <p class="card-text">Phone : {{customerDetails.phone}}</p>
-            <p class="card-text">City : {{customerDetails.city}}</p>
-            <p class="card-text">State : {{customerDetails.state}}</p>
-            <p class="card-text">Country : {{customerDetails.country}}</p>
-            <p class="card-text">Organization : {{customerDetails.organization}}</p>
-            <p class="card-text">Job Profile : {{customerDetails.jobProfile}}</p>
-            <p class="card-text">Additional Info : {{customerDetails.additionalInfo}}</p>
             <a v-on:click="goToMainPage()" class="btn btn-primary"><span style="color:white">Go Back</span></a>
         </div>
     </div>
@@ -51,9 +44,9 @@ export default {
     mounted() {
         axios({
             method: "GET",
-            "url": "assets/samplejson/customer"+this.$route.params.id+".json"
+            "url": "https://reqres.in/api/users/"+this.$route.params.id
         }).then(response => {
-            this.customerDetails = response.data;
+            this.customerDetails = response.data.data;
         }, error => {
             console.error(error);
         });
